@@ -1,0 +1,4 @@
+GoogleNews*
+*.pyc
+.DS_Store
+*.swp
