@@ -19,6 +19,7 @@ from sklearn import decomposition
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import nltk
+from load_cvs import is_proper_cv
 nltk.download('stopwords')
 stops = set(stopwords.words("english"))
 
@@ -126,8 +127,8 @@ def plot_words(model, words):
 
 # good CV data
 # cv_dir = '/home/laura/cv-project/Business_CV_Books/BK1'
-cv_dir = '~/Dropbox (Prodigy)/The Deloreans/Careers Data (CVs)/Data Science 11Dec2017/Business CV Books'
-cv_list = glob.glob('{}/BK*-CV*.pdf'.format(cv_dir))
+cv_dir = '/Users/rukayajohaadien/Dropbox (Prodigy)/The Deloreans/Careers Data (CVs)/Good CVs'
+cv_list = glob.glob('{}/*.pdf'.format(cv_dir))
 # hack for the moment -- repeat CV book pdfs four times,
 #  to have comparable number of CVs in both categories
 #  (do this properly in a real model!)
@@ -137,7 +138,7 @@ labels_cvbook = np.ones(len(pdf_text_cvbook), dtype=np.int)
 
 # bad CV data
 #cv_dir = '/home/laura/cv-project/community_collected_CVs'
-cv_dir = '~/Dropbox (Prodigy)/The Deloreans/Careers Data (CVs)/Data Science 11Dec2017/20171211103034-IE-CVs'
+cv_dir = '/Users/rukayajohaadien/Dropbox (Prodigy)/The Deloreans/Careers Data (CVs)/Bad CVs'
 cv_list = glob.glob('{}/*.pdf'.format(cv_dir))
 pdf_names_community, pdf_text_community, stem_dict_1 = get_pdf_text(cv_list)
 labels_community = np.zeros(len(pdf_text_community), dtype=np.int)
