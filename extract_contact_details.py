@@ -15,3 +15,22 @@ def get_phone_number(cv_text):
 def get_address(cv_text):
     address = pyap.parse(cv_text.replace('\n', ''), country='US')
     return address
+
+
+def education_appearance_position(content):
+    education_words = [
+        'education',
+        'university',
+        'graduate'
+    ]
+    len_content = len(content)
+    ed_position = len_content
+    for ew in education_words:
+        ii = content.find(ew)
+        if (ii > 0) and (ii < ed_position):
+            ed_position = ii
+
+    if ed_position == len_content:
+        return
+    else:
+        return ed_position / len_content

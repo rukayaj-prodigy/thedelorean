@@ -1,4 +1,5 @@
 import PyPDF2
+import re
 
 
 def is_proper_cv(cv_text):
@@ -22,4 +23,9 @@ def get_pdf_text(cv):
         pdf_content += page_content
 
     return pdf_content
+
+
+def extract_words(cv_text):
+    new_text = re.sub(r'[^\w ]', '', cv_text)
+    return re.sub(r'\s+', ' ', new_text)
 
