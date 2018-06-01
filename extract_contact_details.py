@@ -9,7 +9,10 @@ def get_email(cv_text):
 def get_phone_number(cv_text):
     # We're assuming the first phone number this finds in the CV is the one which belongs to this person
     phone_number = re.findall(r"(\d{3}[-\.\s]\d{3}[-\.\s]\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]\d{4}|\d{3}[-\.\s]\d{4})", cv_text)
-    return phone_number
+    if phone_number:
+        return phone_number[0]
+    else:
+        return ''
 
 
 def get_address(cv_text):
@@ -31,6 +34,9 @@ def education_appearance_position(content):
             ed_position = ii
 
     if ed_position == len_content:
-        return
+        return 'Not there'
     else:
-        return ed_position / len_content
+        if round((ed_position / len_content) * 100) > 30:
+            return 'Back'
+        else:
+            return 'Front'

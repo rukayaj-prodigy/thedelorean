@@ -1,21 +1,9 @@
-
-from gensim.models.doc2vec import LabeledSentence
 from gensim.models import doc2vec, KeyedVectors
-
-import glob
 from pathlib import Path
 import PyPDF2
 import re
-
-import numpy as np
 import matplotlib.pylab as plt
-from random import shuffle
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
 from sklearn import decomposition
-
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 import nltk
@@ -41,7 +29,7 @@ def get_pdf_text(cv_list):
 
         if not is_proper_cv(page_content):
             print("Throwing away cv")
-            print(page_content)
+            #print(page_content)
             continue
 
         tagged_document, stem_dict_doc = preprocess_lines(

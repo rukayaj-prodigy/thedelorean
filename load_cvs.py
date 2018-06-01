@@ -9,6 +9,8 @@ def is_proper_cv(cv_text):
         return False
     if cv_text.count('#') > 10:
         return False
+    if cv_text.count('ˇ') > 10:
+        return False
 
     return True
 
@@ -22,7 +24,7 @@ def get_pdf_text(cv):
         page_content = page.extractText()
         pdf_content += page_content
 
-    return pdf_content
+    return pdf_content.replace('\n', '')
 
 
 def extract_words(cv_text):

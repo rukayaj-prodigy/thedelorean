@@ -31,11 +31,13 @@ bad_cv_list = glob.glob('{}/Bad CVs/*.pdf'.format(cv_dir))
 
 good_names, good_text, good_dict = helpers.get_pdf_text(good_cv_list)
 good_labels = np.ones(len(good_text), dtype=np.int)
-bad_names, bad_text, bad_dict = helpers.get_pdf_text(good_cv_list)
+bad_names, bad_text, bad_dict = helpers.get_pdf_text(bad_cv_list)
 bad_labels = np.ones(len(good_text), dtype=np.int)
 
+print(str(len(good_text)) + ' <- good cvs, bad cvs ->' + str(len(bad_text)))
+
 # Combine for processing
-text = good_text + bad_text
+pdf_text = good_text + bad_text
 stem_dict = {**good_dict, **bad_dict}
 labels = np.concatenate([good_labels, bad_labels])
 
@@ -54,3 +56,36 @@ print(word_to_check)
 p_stemmer = PorterStemmer()
 check_word = p_stemmer.stem(word_to_check)
 print(model.wv.most_similar(check_word))
+
+cv_vectors = []
+for doc in pdf_text:
+    vectors = model.init_sims(doc.words)
+    cv_vectors.append(vectors)
+    pdb.set_trace()
+
+pdb.set_trace()
+
+train_percentage = 0.7
+train_x, test_x, train_y, test_y = train_test_split(
+    cv_vectors, labels, train_size=train_percentage)
+
+pdb.set_trace()
+
+regression = LogisticRegression()
+regression.fit(train_x, train_y)
+lr_score = regression.score(test_x, test_y)
+print()
+print('Logistic regression accuracy:', lr_score)
+
+pdb.set_trace()
+
+# fit
+forest = RandomForestClassifier(n_estimators=100)
+forest = forest.fit(train_x, train_y)
+
+# check fit results
+result = forest.predict(test_x)
+diff = result == test_y
+accuracy = diff.astype(int).sum() / len(diff)
+print()
+print('Random forest accuracy:', accuracy)
