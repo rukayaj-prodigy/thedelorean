@@ -11,7 +11,7 @@ idna==2.6
 jmespath==0.9.3
 kiwisolver==1.0.1
 matplotlib==2.2.2
-nltk==3.3
+nltk==3.4.5
 numpy==1.14.3
 pyap==0.1.0
 pyparsing==2.2.0
