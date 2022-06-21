@@ -12,7 +12,7 @@ jmespath==0.9.3
 kiwisolver==1.0.1
 matplotlib==2.2.2
 nltk==3.3
-numpy==1.14.3
+numpy==1.22.0
 pyap==0.1.0
 pyparsing==2.2.0
 PyPDF2==1.26.0
